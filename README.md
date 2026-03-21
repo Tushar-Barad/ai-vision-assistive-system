@@ -59,16 +59,12 @@ Assistive technology for visually impaired individuals to navigate safely and in
 
 ---
 ## 📷 Demo
-
 <img width="3072" height="4096" alt="image" src="https://github.com/user-attachments/assets/7da142ec-d288-480a-a706-c8837c1b3481" />
 
 video demo -  https://drive.google.com/file/d/146jbzx7vG6mVJuqVmpyGwqjQxipi_6GZ/view?usp=drivesdk
-
-
-
-
 
 *thiss is just thing that i need to possible later i update so much good thing that is far batter than this
 also this project focus on cost cutting that is possible by intigrate AI and IOT 
 
 enjoy and use it and learn it 
+thank you 
