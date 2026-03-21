@@ -1,4 +1,3 @@
-<img width="3072" height="4096" alt="image" src="https://github.com/user-attachments/assets/aa6906fd-70e0-4eab-ba98-76b68d879792" /># AI Vision Assistive System
 
 ## 📌 Overview
 An AI-powered assistive system designed to help visually impaired individuals understand their surroundings through real-time audio feedback.
