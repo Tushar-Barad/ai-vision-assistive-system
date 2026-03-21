@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BT7 Pvt. Ltd | IoT + AI Smart Stick</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .lang-btn {
+            padding: 10px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-title i {
+            font-size: 1.8rem;
+        }
+        
+        .output-box {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 200px;
+            margin-bottom: 20px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+        
+        .output-text {
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .hindi-text {
+            font-family: 'Nirmala UI', 'Mangal', 'Arial Unicode MS', sans-serif;
+            font-size: 1.3rem;
+            line-height: 1.8;
+        }
+        
+        .gujarati-text {
+            font-family: 'Shruti', 'Sanskrit Text', 'Arial Unicode MS', sans-serif;
+            font-size: 1.3rem;
+            line-height: 1.8;
+        }
+        
+        .image-container {
+            width: 100%;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .captured-image {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+        
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, #0057e7, #0077ff);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(to right, #0045b5, #0065e0);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 87, 231, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4caf50;
+        }
+        
+        .status-text {
+            font-size: 0.9rem;
+        }
+        
+        .device-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .card {
+                min-width: 100%;
+            }
+            
+            .device-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .language-selector {
+                flex-wrap: wrap;
+            }
+        }
+        
+        /* Animation for blinking status */
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .blink {
+            animation: blink 2s infinite;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .loading-dots {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .loading-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #fff;
+            animation: bounce 1.5s infinite;
+        }
+        
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .language-info {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            text-align: center;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">BT7 Pvt. Ltd</div>
+            <div class="tagline">IoT + AI Smart Stick for the Visually Impaired</div>
+            
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="en">English</button>
+                <button class="lang-btn" data-lang="hi">हिंदी</button>
+                <button class="lang-btn" data-lang="gu">ગુજરાતી</button>
+            </div>
+            <div class="language-info">Select language for text-to-speech output</div>
+        </header>
+        
+        <div class="main-content">
+            <div class="card">
+                <h2 class="card-title">
+                    <i>📷</i> Image Analysis
+                </h2>
+                
+                <div class="image-container">
+                    <img id="capturedImage" class="captured-image" alt="Captured image from smart stick">
+                </div>
+                
+                <div class="loading" id="imageLoading">
+                    <div class="loading-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <p>Processing image...</p>
+                </div>
+                
+                <div class="output-box">
+                    <p class="output-text" id="textOutput">
+                        Press the button on your smart stick to capture an image. The AI analysis will appear here.
+                    </p>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="unlockAndSpeak()">
+                        <i>🔊</i> Speak Description
+                    </button>
+                    <button class="btn btn-secondary" onclick="copyToClipboard()">
+                        <i>📋</i> Copy to Clipboard
+                    </button>
+                </div>
+                
+                <div class="status-indicator">
+                    <div class="status-dot" id="statusDot"></div>
+                    <div class="status-text" id="statusText">Device connected and ready</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title">
+                    <i>ℹ️</i> How It Works
+                </h2>
+                <div class="output-box">
+                    <p class="output-text">
+                        1. Press the button on your smart stick to capture an image<br><br>
+                        2. The image is sent to AI for analysis<br><br>
+                        3. AI describes the scene in detail<br><br>
+                        4. The description appears here and can be spoken aloud
+                    </p>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn btn-secondary" onclick="refreshPage()">
+                        <i>🔄</i> Refresh Page
+                    </button>
+                </div>
+                
+                <div class="status-indicator">
+                    <div class="status-dot blink"></div>
+                    <div class="status-text">Auto-refresh enabled (every 3 seconds)</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="device-info">
+            <div>Device ID: STICK-{{ range(1000, 9999) | random }}</div>
+            <div>IP: 192.168.52.232</div>
+            <div>Status: Active</div>
+        </div>
+        
+        <footer>
+            <p>BT7 Pvt. Ltd © 2023 | Making Technology Accessible for Everyone</p>
+        </footer>
+    </div>
+
+    <script>
+        let lastSpoken = "";
+        let speechUnlocked = sessionStorage.getItem("ttsUnlocked") === "true";
+        let lastImageData = "";
+        let currentLanguage = 'en'; // Default language
+
+        // Set up language selection
+        document.querySelectorAll('.lang-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                currentLanguage = this.getAttribute('data-lang');
+                document.getElementById('statusText').textContent = `Language set to ${this.textContent}`;
+                
+                // Re-speak the current text if speech is unlocked
+                if (speechUnlocked) {
+                    speakText();
+                }
+            });
+        });
+
+        // Function to check for new data from the server
+        async function checkForUpdates() {
+            try {
+                const response = await fetch('/get-latest');
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (data && data.description) {
+                        // Update the text output
+                        const outputElement = document.getElementById('textOutput');
+                        outputElement.textContent = data.description;
+                        
+                        // Apply language-specific styling
+                        outputElement.classList.remove('hindi-text', 'gujarati-text', 'output-text');
+                        
+                        // Detect language and apply appropriate styling
+                        if (containsDevanagari(data.description)) {
+                            outputElement.classList.add('hindi-text');
+                        } else if (containsGujarati(data.description)) {
+                            outputElement.classList.add('gujarati-text');
+                        } else {
+                            outputElement.classList.add('output-text');
+                        }
+                        
+                        // If there's image data, display it
+                        if (data.image && data.image !== lastImageData) {
+                            lastImageData = data.image;
+                            document.getElementById('capturedImage').src = 'data:image/jpeg;base64,' + data.image;
+                            document.getElementById('capturedImage').style.display = 'block';
+                            document.getElementById('imageLoading').style.display = 'none';
+                        }
+                        
+                        // Speak if unlocked
+                        if (speechUnlocked) {
+                            speakText();
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error checking for updates:', error);
+            }
+        }
+
+        // Function to detect Hindi text (Devanagari script)
+        function containsDevanagari(text) {
+            return /[\u0900-\u097F]/.test(text);
+        }
+
+        // Function to detect Gujarati text
+        function containsGujarati(text) {
+            return /[\u0A80-\u0AFF]/.test(text);
+        }
+
+        function speakText() {
+            const text = document.getElementById("textOutput").innerText;
+            if (text && text !== lastSpoken && speechUnlocked) {
+                const msg = new SpeechSynthesisUtterance(text);
+                
+                // Set language based on selection
+                switch(currentLanguage) {
+                    case 'hi':
+                        msg.lang = 'hi-IN'; // Hindi
+                        break;
+                    case 'gu':
+                        msg.lang = 'gu-IN'; // Gujarati
+                        break;
+                    default:
+                        msg.lang = 'en-US'; // English
+                }
+                
+                msg.rate = 1.0;
+                msg.pitch = 1.0;
+                msg.volume = 1;
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(msg);
+                lastSpoken = text;
+                
+                // Update status
+                document.getElementById("statusText").textContent = `Speaking in ${document.querySelector('.lang-btn.active').textContent}...`;
+            }
+        }
+
+        function unlockAndSpeak() {
+            speechUnlocked = true;
+            sessionStorage.setItem("ttsUnlocked", "true");
+            document.getElementById("statusText").textContent = `Voice unlocked - speaking in ${document.querySelector('.lang-btn.active').textContent}`;
+            speakText();
+            
+            // Change button text
+            const speakBtn = document.querySelector('.btn-primary');
+            speakBtn.innerHTML = '<i>🔊</i> Speaking...';
+            setTimeout(() => {
+                speakBtn.innerHTML = '<i>🔊</i> Speak Again';
+            }, 2000);
+        }
+
+        function copyToClipboard() {
+            const text = document.getElementById("textOutput").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                document.getElementById("statusText").textContent = "Text copied to clipboard!";
+                
+                // Provide visual feedback
+                const copyBtn = document.querySelector('.btn-secondary');
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i>✓</i> Copied!';
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+
+        function refreshPage() {
+            window.location.reload();
+        }
+
+        // Check if we should speak on page load
+        window.onload = function() {
+            if (speechUnlocked) {
+                document.getElementById("statusText").textContent = "Voice enabled - ready to speak";
+                speakText();
+            }
+            
+            // Check for updates immediately
+            checkForUpdates();
+            
+            // Set up periodic checking
+            setInterval(checkForUpdates, 3000);
+            
+            // Simulate connection status
+            setInterval(() => {
+                const dot = document.getElementById("statusDot");
+                dot.style.backgroundColor = dot.style.backgroundColor === 'rgb(76, 175, 80)' ? '#ff9800' : '#4caf50';
+            }, 2000);
+        };
+    </script>
+</body>
+</html>
