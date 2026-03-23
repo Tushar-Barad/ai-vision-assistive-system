@@ -68,3 +68,6 @@ also this project focus on cost cutting that is possible by intigrate AI and IOT
 
 enjoy and use it and learn it 
 thank you 
+
+
+next progress upload soon 
